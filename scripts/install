@@ -119,8 +119,12 @@ ynh_store_file_checksum --file="$final_path/.env"
 #=================================================
 
 # Set permissions to app files
-chown -R $app: $final_path
-chmod -R 755 $final_path
+#chown -R $app: $final_path
+#chmod -R 755 $final_path
+
+chown -R root:root $final_path
+chown -R www-data:www-data $final_path/writable
+chown -R www-data:www-data $final_path/public/media
 
 #=================================================
 # SETUP SSOWAT
