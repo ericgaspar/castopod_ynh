@@ -122,9 +122,9 @@ ynh_store_file_checksum --file="$final_path/.env"
 #chown -R $app: $final_path
 #chmod -R 755 $final_path
 
-chown -R root:root $final_path
-chown -R www-data:www-data $final_path/writable
-chown -R www-data:www-data $final_path/public/media
+chown -R $app: $final_path
+chmod -R 755 $final_path/writable
+chmod -R 755 $final_path/public/media
 
 #=================================================
 # SETUP SSOWAT
