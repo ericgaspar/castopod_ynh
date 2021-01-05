@@ -139,7 +139,7 @@ ynh_systemd_action --service_name=nginx --action=reload
 ynh_script_progression --message="Finalizing installation..." --weight=10
 
 # Installation with cURL
-installUrl="/cp-install"
+installUrl="/cp-install?submit"
 
 ynh_local_curl $installUrl "email=$email" "username=$admin" "password=$password"
 
