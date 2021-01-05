@@ -23,6 +23,9 @@ ynh_abort_if_errors
 domain=$YNH_APP_ARG_DOMAIN
 path_url="/"
 is_public=$YNH_APP_ARG_IS_PUBLIC
+admin=$YNH_APP_ARG_ADMIN
+password=$YNH_APP_ARG_PASSWORD
+email=$(ynh_user_get_info "$admin" mail)
 
 app=$YNH_APP_INSTANCE_NAME
 
@@ -45,6 +48,7 @@ ynh_script_progression --message="Storing installation settings..." --weight=1
 ynh_app_setting_set --app=$app --key=domain --value=$domain
 ynh_app_setting_set --app=$app --key=path --value=$path_url
 ynh_app_setting_set --app=$app --key=is_public --value=$is_public
+ynh_app_setting_set --app=$app --key=admin --value=$admin
 
 #=================================================
 # CREATE A MYSQL DATABASE
@@ -145,9 +149,9 @@ ynh_local_curl $installUrl "email=$email" "username=$admin" "password=$password"
 ynh_script_progression --message="Configuring SSOwat..." --weight=10
 
 # Make app public if necessary or protect it
-if [ $is_public -eq 1 ]
+if [ $is_public -eq 0 ]
 then
-	ynh_permission_update --permission "main" --add "visitors"
+	ynh_permission_update --permission "main" --remove "visitors"
 fi
 
 #=================================================
